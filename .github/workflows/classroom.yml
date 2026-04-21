@@ -2,7 +2,7 @@ name: Autograding Tests
 
 on:
   push:
-  workflow_dispatch:
+    workflow_dispatch:
 
 permissions:
   checks: write
@@ -22,10 +22,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
+          cache: 'npm'
+          cache-dependency-path: package.json
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install dependencies (force)
+        run: npm install --legacy-peer-deps
 
       - name: Contract
         id: contract
